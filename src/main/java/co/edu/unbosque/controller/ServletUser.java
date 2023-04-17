@@ -1,8 +1,5 @@
 package co.edu.unbosque.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import co.edu.unbosque.view.VistaConsola;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
