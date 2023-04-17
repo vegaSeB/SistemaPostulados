@@ -11,7 +11,6 @@ import jakarta.servlet.ServletContext;
 public class PostuladoDAO {
 	private ArrayList<PostuladoDTO> postulados;
 	private ServletContext context;
-
 	public PostuladoDAO(ServletContext context) {
 		this.context = context;
 		cargar(context);
@@ -22,8 +21,9 @@ public class PostuladoDAO {
 		ArrayList<PostuladoDTO> tmp = (ArrayList<PostuladoDTO>) FileHandler.loadSerializable(cont);
 		if (tmp != null) {
 			postulados = tmp;
-			VistaConsola.msm("Postulates loaded successfully", context);
 		} else {
+			postulados = new ArrayList<>();
+			VistaConsola.msm("Postulates loaded successfully", context);
 			postulados = new ArrayList<>();
 			VistaConsola.msm("ArrayList Postulates created successfully", context);
 		}
