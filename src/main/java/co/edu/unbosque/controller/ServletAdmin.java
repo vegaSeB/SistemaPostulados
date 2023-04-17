@@ -11,6 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 public class ServletAdmin extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// System.out.println(FileHandler.loadSerializable(req));
+
 	}
 }
