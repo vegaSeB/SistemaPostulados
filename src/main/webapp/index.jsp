@@ -57,7 +57,7 @@ body::before {
 	<h1 class="d-block p-2 text-bg-success text-center">Universidad el
 		Bosque</h1>
 	<div class="container pt-lg-3">
-		<form class="row g-3 pb-lg-3 pt-lg-3" action="/ServletUser" method="get" id="pr" >
+		<form class="row g-3 pb-lg-3 pt-lg-3" action="http://localhost:8080/SistemaPostulados/ServletUser" method="post" id="pr" >
 			<div class="col-md-6">
 				<label class="form-label">Nombres</label> <input name="nombre"
 					type="text" class="form-control" pattern="[A-Za-z ]+"
