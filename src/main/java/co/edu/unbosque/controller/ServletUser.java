@@ -1,5 +1,8 @@
 package co.edu.unbosque.controller;
 
-public class ServletUser {
+import jakarta.servlet.http.HttpServlet;
+
+@SuppressWarnings("serial")
+public class ServletUser extends HttpServlet {
 
 }
