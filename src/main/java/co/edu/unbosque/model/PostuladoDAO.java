@@ -42,14 +42,16 @@ public class PostuladoDAO {
 						homologacion, calcularEdad(fecha)));
 				guardar(context);
 				FileHandler.generarCSV(postulados, "Datos.csv", context);
-				VistaConsola.msm("Postulate successfully created", context);
+				VistaConsola.msm("Postulate " + apellidos + " successfully created", context);
 				return true;
 			} else {
-				VistaConsola.msm("Postulate not created due to having another similar postulate", context);
+				VistaConsola.msm("Postulate " + apellidos + " not created due to having another similar postulate",
+						context);
 				return false;
 			}
 		} catch (Exception e) {
-			VistaConsola.err("Postulate not created because of the following error", e.getLocalizedMessage(), context);
+			VistaConsola.err("Postulate " + apellidos + " not created because of the following error",
+					e.getLocalizedMessage(), context);
 			return false;
 		}
 	}
@@ -61,11 +63,11 @@ public class PostuladoDAO {
 				postulados.remove(i);
 				guardar(context);
 				FileHandler.generarCSV(postulados, "Datos.csv", context);
-				VistaConsola.msm("Postulate successfully removed", context);
+				VistaConsola.msm("Postulate " + apellidos + " successfully removed", context);
 				return true;
 			}
 		}
-		VistaConsola.msm("Postulate to delete not found", context);
+		VistaConsola.msm("Postulate " + apellidos + " to delete not found", context);
 		return false;
 	}
 
@@ -78,11 +80,11 @@ public class PostuladoDAO {
 						homologacion, calcularEdad(fecha)));
 				guardar(context);
 				FileHandler.generarCSV(postulados, "Datos.csv", context);
-				VistaConsola.msm("Correctly modified postulate", context);
+				VistaConsola.msm("Correctly modified postulate " + apellidos, context);
 				return true;
 			}
 		}
-		VistaConsola.msm("Postulate to modify not found", context);
+		VistaConsola.msm("Postulate " + apellidos + " to modify not found", context);
 		return false;
 	}
 
@@ -90,11 +92,11 @@ public class PostuladoDAO {
 		for (int i = 0; i < postulados.size(); i++) {
 			if (postulados.get(i).getApellidos().equalsIgnoreCase(apellidos)
 					&& postulados.get(i).getFecha().compareTo(fecha) == 0) {
-				VistaConsola.msm("Postulate successfully found", context);
+				VistaConsola.msm("Postulate " + apellidos + " successfully found", context);
 				return postulados.get(i);
 			}
 		}
-		VistaConsola.msm("Postulate not found", context);
+		VistaConsola.msm("Postulate " + apellidos + " not found", context);
 		return null;
 	}
 
