@@ -6,10 +6,20 @@
   <packaging>war</packaging>
   <name>SistemaPostulados</name>
   <dependencies>
+	  <dependency>
+		  <groupId>org.fusesource.jansi</groupId>
+		  <artifactId>jansi</artifactId>
+		  <version>2.4.0</version>
+	</dependency>
 	<dependency>
 		<groupId>jakarta.servlet</groupId>
 		<artifactId>jakarta.servlet-api</artifactId>
 		<version>6.0.0</version>
+	</dependency>
+	<dependency>
+    	<groupId>com.opencsv</groupId>
+    	<artifactId>opencsv</artifactId>
+    	<version>5.5.2</version>
 	</dependency>
   </dependencies>
   <build>
