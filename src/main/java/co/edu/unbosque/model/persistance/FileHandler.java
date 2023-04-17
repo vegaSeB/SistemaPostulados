@@ -3,15 +3,18 @@
  */
 package co.edu.unbosque.model.persistance;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Properties;
+import java.util.ArrayList;
 
+import com.opencsv.CSVWriter;
+
+import co.edu.unbosque.model.PostuladoDTO;
+import co.edu.unbosque.view.VistaConsola;
 import jakarta.servlet.ServletContext;
 
 /**
@@ -28,28 +31,6 @@ public class FileHandler {
 	private static ObjectOutputStream oos;
 
 	/**
-	 * Method in charge of giving the properties of the texts
-	 * 
-	 * @return Propiedades
-	 */
-	public static Properties loadPropities() {
-		Properties p = new Properties();
-		try {
-			p.load(new FileInputStream(new File("src/co/edu/unbosque/model/persistence/spa.properties")));
-		} catch (FileNotFoundException e) {
-			System.err.println("No se puede leer el archivo");
-			System.err.println(e.getMessage());
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.err.println("No se puede leer el archivo");
-			System.err.println(e.getMessage());
-			e.printStackTrace();
-		}
-		return p;
-
-	}
-
-	/**
 	 * Method for writing to a serialized file<br>
 	 * <b>pre: </b> It is required to write to the serialized file on condition that
 	 * it is "Existing"<br>
@@ -62,17 +43,19 @@ public class FileHandler {
 			fos = new FileOutputStream(
 					req.getRealPath("/") + "WEB-INF/classes/co/edu/unbosque/model/persistance/guardado.post");
 			oos = new ObjectOutputStream(fos);
+			VistaConsola.msm("Serialized file opened successfully", req);
 		} catch (IOException e) {
-			System.out.println("File not found (serializable)");
-			System.out.println(e.getMessage());
+			VistaConsola.err("Could not open serialized file because of the following error", e.getLocalizedMessage(),
+					req);
 		}
 		try {
 			oos.writeObject(o);
 			fos.close();
 			oos.close();
+			VistaConsola.msm("Wrote to serializable file successfully", req);
 		} catch (IOException e) {
-			System.out.println("Error on writing (serializable)");
-			System.out.println(e.getMessage());
+			VistaConsola.err("Could not write to serialized file because of the following error",
+					e.getLocalizedMessage(), req);
 		}
 	}
 
@@ -92,9 +75,45 @@ public class FileHandler {
 			tmp = ois.readObject();
 			ois.close();
 			fis.close();
+			VistaConsola.msm("Serialized file uploaded successfully", req);
 		} catch (IOException | ClassNotFoundException e) {
+			VistaConsola.err("Failed to load serialized file due to the following error", e.getLocalizedMessage(), req);
 			tmp = null;
 		}
 		return tmp;
+	}
+
+	public static void writeHistory(String msm, ServletContext req) {
+		try {
+			FileWriter fw = new FileWriter(
+					req.getRealPath("/") + "WEB-INF/classes/co/edu/unbosque/model/persistance/History.txt", true);
+			fw.write(msm + "\n");
+			fw.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void generarCSV(ArrayList<PostuladoDTO> postulados, String fileName, ServletContext req) {
+		try {
+			FileWriter fw = new FileWriter(System.getProperty("user.home") + "/" + "Desktop/" + fileName);
+			CSVWriter csvW = new CSVWriter(fw, ';', CSVWriter.DEFAULT_QUOTE_CHARACTER,
+					CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+			String[] encabezados = { "Nombre/s", "Apellido/s", "Colegio", "Carrera", "Estrato", "Fecha de nacimiento",
+					"Homologacion", "Edad", "Foto" };
+			csvW.writeNext(encabezados);
+
+			for (PostuladoDTO post : postulados) {
+				String[] fila = { post.getNombres(), post.getApellidos(), post.getColegio(), post.getCarrera(),
+						post.getEstrato(), post.getFecha().toString(), String.valueOf(post.isHomologacion()),
+						String.valueOf(post.getEdad()), post.getFoto() };
+				csvW.writeNext(fila);
+			}
+
+			csvW.close();
+			VistaConsola.msm("CSV file updated successfully", req);
+		} catch (Exception e) {
+			VistaConsola.err("CSV file updated incorrectly due to the following error", e.getLocalizedMessage(), req);
+		}
 	}
 }
