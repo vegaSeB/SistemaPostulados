@@ -1,7 +1,7 @@
 package co.edu.unbosque.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @SuppressWarnings("serial")
 public class PostuladoDTO implements Serializable {
@@ -11,7 +11,7 @@ public class PostuladoDTO implements Serializable {
 	private String carrera;
 	private String estrato;
 	private String foto;
-	private Date fecha;
+	private LocalDate fecha;
 	private boolean homologacion;
 	private byte edad;
 
@@ -27,7 +27,7 @@ public class PostuladoDTO implements Serializable {
 	 * @param edad
 	 */
 	public PostuladoDTO(String nombres, String apellidos, String colegio, String carrera, String estrato, String foto,
-			Date fecha, boolean homologacion, byte edad) {
+			LocalDate fecha, boolean homologacion, byte edad) {
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.colegio = colegio;
@@ -126,14 +126,14 @@ public class PostuladoDTO implements Serializable {
 	/**
 	 * @return the fecha
 	 */
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
 	/**
 	 * @param fecha the fecha to set
 	 */
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 
