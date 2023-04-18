@@ -57,7 +57,7 @@ body::before {
 	<h1 class="d-block p-2 text-bg-success text-center">Universidad el
 		Bosque</h1>
 	<div class="container pt-lg-3">
-		<form class="row g-3 pb-lg-3 pt-lg-3" action="http://localhost:8080/SistemaPostulados/ServletUser" method="post" id="pr" >
+		<form class="row g-3 pb-lg-3 pt-lg-3" action="http://localhost:8080/SistemaPostulados/ServletUser" method="post" enctype="multipart/form-data" id="pr" >
 			<div class="col-md-6">
 				<label class="form-label">Nombres</label> <input name="nombre"
 					type="text" class="form-control" pattern="[A-Za-z ]+"
@@ -135,8 +135,8 @@ body::before {
 			<div>
 				<label for="formFile" class="form-label">Foto</label> <input
 					class="form-control" id="formFile" type="file" name="foto"
-					accept="image/jpeg, image/png"
-					title="Suba una imagen en .jpeg o .png" required>
+					accept="image/jpeg, image/png" maxlength="2097152" 
+					title="Suba una imagen en .jpeg o .png no mas de 2MB"  required>
 			</div>
 			<div class="col-12">
 				<button type="submit" class="btn btn-primary">Ingresar
