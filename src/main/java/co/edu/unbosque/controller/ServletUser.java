@@ -29,6 +29,7 @@ public class ServletUser extends HttpServlet {
 		String fecha = req.getParameter("fecha");
 		String carrera = req.getParameter("carrera");
 		String estrato = req.getParameter("apellio");
+		String foto = "";
 		System.out.println(nomb);
 		//
 		String regex = "image/(jpeg|png)";
@@ -57,5 +58,8 @@ public class ServletUser extends HttpServlet {
 
 		System.err.println("Archivo cargado con éxito. " + this.getServletContext().getRealPath("/")
 				+ "WEB-INF/classes/co/edu/unbosque/model/persistance/" + fileName);
+		foto = fileName;
+		//
 	}
+
 }
