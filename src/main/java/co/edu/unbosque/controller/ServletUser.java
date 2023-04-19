@@ -40,7 +40,6 @@ public class ServletUser extends HttpServlet {
 		String estrato = req.getParameter("estrato");
 		String homo = req.getParameter("homo");
 		String foto = "";
-		System.out.println(estrato);
 		boolean isHomo = false;
 		if (homo.equalsIgnoreCase("si")) {
 			isHomo = true;

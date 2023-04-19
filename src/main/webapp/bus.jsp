@@ -79,7 +79,7 @@ body::before {
             </form>
         </div>
         <div class="position-fixed fixed-bottom fixed-right p-3">
-      <a class="btn btn-light" href="index.jsp">Ususario</a>
+      <a class="btn btn-success" href="adm.jsp">Volver</a>
     </div>
     </body>
 </html>

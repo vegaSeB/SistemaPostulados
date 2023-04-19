@@ -64,8 +64,8 @@ body::before {
                 <h2>Eliminacion de postulado</h2>
                 <div class="col-6">
                     <label class="form-label">Apellidos</label>
-                    <input name="apellidos" type="text" class="form-control"
-                        pattern="[a-zA-Z]"
+                    <input name="apellido" type="text" class="form-control"
+                        pattern="[A-Za-z ]+"
                         title="No se permiten Simbolos ni Numeros" required>
                 </div>
                 <div class="col-6">
@@ -80,7 +80,7 @@ body::before {
             </form>
         </div>
         <div class="position-fixed fixed-bottom fixed-right p-3">
-      <a class="btn btn-light" href="index.jsp">Ususario</a>
+      <a  class="btn btn-success" href="adm.jsp">Volver</a>
     </div>
     </body>
 </html>
