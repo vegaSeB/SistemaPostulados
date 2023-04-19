@@ -19,14 +19,25 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @SuppressWarnings("serial")
 @MultipartConfig
 public class ServletUser extends HttpServlet {
+
 	private PostuladoDAO postul;
 
 	public ServletUser() {
 		postul = new PostuladoDAO();
+    }
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		PrintWriter salida = new PrintWriter(resp.getWriter());
+		String nomb = req.getParameter("nombre");
+		salida.println("<html>\r\n" + " <head>\r\n" + " </head>\r\n" + " <body>\r\n" + "   <h1>Hello World " + nomb
+				+ "<h1>\r\n" + " </body>\r\n" + "</html>");
 	}
 
 	@Override
