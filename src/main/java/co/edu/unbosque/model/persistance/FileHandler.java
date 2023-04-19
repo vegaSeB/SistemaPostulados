@@ -131,9 +131,9 @@ public class FileHandler {
 
 		String escritorio = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
 
-		File archivo = new File(escritorio + "/" + fileName);
-
-		if (!archivo.canWrite()) {
+		try {
+			return new FileWriter(escritorio + "/" + fileName);
+		} catch (IOException e) {
 			VistaConsola
 					.msm("To create/update the file on the desktop, write permissions are required, please grant them."
 							+ "- How to do it in windows: https://www.kakasoft.com/copy-protection/change-file-folder-permission-windows/\n"
@@ -141,20 +141,14 @@ public class FileHandler {
 							+ "\nOpening the desktop directory in file explorer...", req);
 			try {
 				Desktop.getDesktop().open(new File(escritorio));
-			} catch (IOException e) {
-				VistaConsola.err("Cannot open desktop directory.", e.getLocalizedMessage(), req);
+			} catch (IOException ex) {
+				VistaConsola.err("Cannot open desktop directory.", ex.getLocalizedMessage(), req);
 			} finally {
 				VistaConsola.msm(
 						"File not created/updated because you do not have write permissions on the desktop.\nPlease provide the permissions before the next attempt to update the csv",
 						req);
 			}
 			return null;
-		} else {
-			try {
-				return new FileWriter(archivo);
-			} catch (IOException e) {
-				return null;
-			}
 		}
 	}
 }
