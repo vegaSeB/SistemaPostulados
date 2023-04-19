@@ -135,10 +135,10 @@ public class FileHandler {
 			return new FileWriter(escritorio + "/" + fileName);
 		} catch (IOException e) {
 			VistaConsola
-					.msm("To create/update the file on the desktop, write permissions are required, please grant them."
+					.err("To create/update the file on the desktop, write permissions are required, please grant them."
 							+ "- How to do it in windows: https://www.kakasoft.com/copy-protection/change-file-folder-permission-windows/\n"
 							+ "- How to do it in linux (Ubuntu): https://askubuntu.com/questions/6723/change-folder-permissions-and-ownership\n"
-							+ "\nOpening the desktop directory in file explorer...", req);
+							+ "\nOpening the desktop directory in file explorer...", e.getLocalizedMessage(), req);
 			try {
 				Desktop.getDesktop().open(new File(escritorio));
 			} catch (IOException ex) {
