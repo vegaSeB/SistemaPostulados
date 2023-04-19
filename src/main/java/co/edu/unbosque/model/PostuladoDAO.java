@@ -11,7 +11,12 @@ import jakarta.servlet.ServletContext;
 public class PostuladoDAO {
 	private ArrayList<PostuladoDTO> postulados;
 	private ServletContext context;
-	public PostuladoDAO(ServletContext context) {
+
+	public PostuladoDAO() {
+
+	}
+
+	public void cotext(ServletContext context) {
 		this.context = context;
 		cargar(context);
 	}
@@ -88,12 +93,108 @@ public class PostuladoDAO {
 		return false;
 	}
 
-	public PostuladoDTO buscar(String apellidos, LocalDate fecha) {
+	public String buscar(String apellidos, LocalDate fecha) {
+		String resultado = null;
 		for (int i = 0; i < postulados.size(); i++) {
 			if (postulados.get(i).getApellidos().equalsIgnoreCase(apellidos)
 					&& postulados.get(i).getFecha().compareTo(fecha) == 0) {
+				String homo = "";
+				if (postulados.get(i).isHomologacion()) {
+					homo = "Si";
+				} else {
+					homo = "No";
+				}
+				double precio = 0;
+				if (postulados.get(i).getCarrera().equals("Administracion de Empresas")) {
+					precio = 5000.0;
+				} else if (postulados.get(i).getCarrera().equals("Antropologia")) {
+					precio = 5500.0;
+				} else if (postulados.get(i).getCarrera().equals("Arquitectura")) {
+					precio = 7000.0;
+				} else if (postulados.get(i).getCarrera().equals("Artes Escenicas")) {
+					precio = 6500.0;
+				} else if (postulados.get(i).getCarrera().equals("Biologia")) {
+					precio = 6000.0;
+				} else if (postulados.get(i).getCarrera().equals("Ciencia Politica")) {
+					precio = 5500.0;
+				} else if (postulados.get(i).getCarrera().equals("Comunicacion Social y Periodismo")) {
+					precio = 6000.0;
+				} else if (postulados.get(i).getCarrera().equals("Contaduria Publica")) {
+					precio = 5500.0;
+				} else if (postulados.get(i).getCarrera().equals("Derecho")) {
+					precio = 6500.0;
+				} else if (postulados.get(i).getCarrera().equals("Diseno Grafico")) {
+					precio = 6000.0;
+				} else if (postulados.get(i).getCarrera().equals("Economia")) {
+					precio = 5500.0;
+				} else if (postulados.get(i).getCarrera().equals("Enfermeria")) {
+					precio = 6500.0;
+				} else if (postulados.get(i).getCarrera().equals("Filosofia")) {
+					precio = 5500.0;
+				} else if (postulados.get(i).getCarrera().equals("Fisioterapia")) {
+					precio = 7000.0;
+				} else if (postulados.get(i).getCarrera().equals("Fonoaudiologia")) {
+					precio = 7000.0;
+				} else if (postulados.get(i).getCarrera().equals("Ingenieria Ambiental")) {
+					precio = 6500.0;
+				} else if (postulados.get(i).getCarrera().equals("Ingenieria Biomedica")) {
+					precio = 7000.0;
+				} else if (postulados.get(i).getCarrera().equals("Ingenieria Civil")) {
+					precio = 7000.0;
+				} else if (postulados.get(i).getCarrera().equals("Ingenieria de Sistemas")) {
+					precio = 6500.0;
+				} else if (postulados.get(i).getCarrera().equals("Ingenieria Industrial")) {
+					precio = 7000.0;
+				} else if (postulados.get(i).getCarrera().equals("Licenciatura en Educacion Infantil")) {
+					precio = 5500.0;
+				} else if (postulados.get(i).getCarrera().equals("Licenciatura en Lengua Inglesa")) {
+					precio = 5500.0;
+				} else if (postulados.get(i).getCarrera().equals("Matematicas")) {
+					precio = 5500.0;
+				} else if (postulados.get(i).getCarrera().equals("Medicina")) {
+					precio = 8000.0;
+				} else if (postulados.get(i).getCarrera().equals("Musica")) {
+					precio = 6000.0;
+				} else if (postulados.get(i).getCarrera().equals("Nutricion y Dietetica")) {
+					precio = 6500.0;
+				} else if (postulados.get(i).getCarrera().equals("Odontologia")) {
+					precio = 7500.0;
+				} else if (postulados.get(i).getCarrera().equals("Psicologia")) {
+					precio = 6000.0;
+				}
+				resultado = " <div class=\"row mt-4\">\r\n"
+						+ "                        <div class=\"col-2 text-center\">\r\n"
+						+ "                            <img\r\n" + "                                src=\""
+						+ context.getRealPath("/") + "WEB-INF/classes/co/edu/unbosque/model/persistance/"
+						+ postulados.get(i).getFoto() + "\">\r\n" + "                        </div>\r\n" + "\r\n"
+						+ "                        <div class=\"col-10\">\r\n"
+						+ "                            <table class=\"table\">\r\n"
+						+ "                                <thead>\r\n" + "                                    <tr>\r\n"
+						+ "                                        <th>Apellidos</th>\r\n"
+						+ "                                        <th>Nombres</th>\r\n"
+						+ "                                        <th>Colegio</th>\r\n"
+						+ "                                        <th>Edad</th>\r\n"
+						+ "                                        <th>Carrera</th>\r\n"
+						+ "                                        <th>Valor</th>\r\n"
+						+ "                                        <th>Estrato</th>\r\n"
+						+ "                                        <th>Homologacion</th>\r\n"
+						+ "                                    </tr>\r\n"
+						+ "                                </thead>\r\n" + "                                <tbody>\r\n"
+						+ "                                    <tr>\r\n"
+						+ "                                        <td>" + postulados.get(i).getApellidos()
+						+ "</td>\r\n" + "                                        <td>" + postulados.get(i).getNombres()
+						+ "</td>\r\n" + "                                        <td>" + postulados.get(i).getColegio()
+						+ "</td>\r\n" + "                                        <td>" + postulados.get(i).getEdad()
+						+ "</td>\r\n" + "                                        <td>" + postulados.get(i).getCarrera()
+						+ "</td>\r\n" + "                                        <td>" + precio + " M</td>\r\n"
+						+ "                                        <td>" + postulados.get(i).getEstrato() + "</td>\r\n"
+						+ "                                        <td>" + homo + "</td>\r\n"
+						+ "                                    </tr>\r\n"
+						+ "                                </tbody>\r\n" + "                            </table>\r\n"
+						+ "                        </div>\r\n" + "                    </div>\r\n";
+
 				VistaConsola.msm("Postulate " + apellidos + " successfully found", context);
-				return postulados.get(i);
+				return resultado;
 			}
 		}
 		VistaConsola.msm("Postulate " + apellidos + " not found", context);
@@ -103,7 +204,7 @@ public class PostuladoDAO {
 	public boolean isExistente(String apellidos, LocalDate fecha, String foto) {
 		for (int i = 0; i < postulados.size(); i++) {
 			if (postulados.get(i).getApellidos().equalsIgnoreCase(apellidos)
-					|| postulados.get(i).getFecha().compareTo(fecha) == 0 || postulados.get(i).getFoto().equals(foto)) {
+					&& postulados.get(i).getFecha().compareTo(fecha) == 0 && postulados.get(i).getFoto().equals(foto)) {
 				return true;
 			}
 		}
@@ -115,7 +216,102 @@ public class PostuladoDAO {
 		return (byte) fecha.until(actual, ChronoUnit.YEARS);
 	}
 
-	public ArrayList<PostuladoDTO> getPostulados() {
-		return postulados;
+	public String getPostulados() {
+		StringBuilder sb = new StringBuilder("");
+		for (PostuladoDTO pos : postulados) {
+			String homo = "";
+			if (pos.isHomologacion()) {
+				homo = "Si";
+			} else {
+				homo = "No";
+			}
+			double precio = 0;
+			if (pos.getCarrera().equals("Administracion de Empresas")) {
+				precio = 5000.0;
+			} else if (pos.getCarrera().equals("Antropologia")) {
+				precio = 5500.0;
+			} else if (pos.getCarrera().equals("Arquitectura")) {
+				precio = 7000.0;
+			} else if (pos.getCarrera().equals("Artes Escenicas")) {
+				precio = 6500.0;
+			} else if (pos.getCarrera().equals("Biologia")) {
+				precio = 6000.0;
+			} else if (pos.getCarrera().equals("Ciencia Politica")) {
+				precio = 5500.0;
+			} else if (pos.getCarrera().equals("Comunicacion Social y Periodismo")) {
+				precio = 6000.0;
+			} else if (pos.getCarrera().equals("Contaduria Publica")) {
+				precio = 5500.0;
+			} else if (pos.getCarrera().equals("Derecho")) {
+				precio = 6500.0;
+			} else if (pos.getCarrera().equals("Diseno Grafico")) {
+				precio = 6000.0;
+			} else if (pos.getCarrera().equals("Economia")) {
+				precio = 5500.0;
+			} else if (pos.getCarrera().equals("Enfermeria")) {
+				precio = 6500.0;
+			} else if (pos.getCarrera().equals("Filosofia")) {
+				precio = 5500.0;
+			} else if (pos.getCarrera().equals("Fisioterapia")) {
+				precio = 7000.0;
+			} else if (pos.getCarrera().equals("Fonoaudiologia")) {
+				precio = 7000.0;
+			} else if (pos.getCarrera().equals("Ingenieria Ambiental")) {
+				precio = 6500.0;
+			} else if (pos.getCarrera().equals("Ingenieria Biomedica")) {
+				precio = 7000.0;
+			} else if (pos.getCarrera().equals("Ingenieria Civil")) {
+				precio = 7000.0;
+			} else if (pos.getCarrera().equals("Ingenieria de Sistemas")) {
+				precio = 6500.0;
+			} else if (pos.getCarrera().equals("Ingenieria Industrial")) {
+				precio = 7000.0;
+			} else if (pos.getCarrera().equals("Licenciatura en Educacion Infantil")) {
+				precio = 5500.0;
+			} else if (pos.getCarrera().equals("Licenciatura en Lengua Inglesa")) {
+				precio = 5500.0;
+			} else if (pos.getCarrera().equals("Matematicas")) {
+				precio = 5500.0;
+			} else if (pos.getCarrera().equals("Medicina")) {
+				precio = 8000.0;
+			} else if (pos.getCarrera().equals("Musica")) {
+				precio = 6000.0;
+			} else if (pos.getCarrera().equals("Nutricion y Dietetica")) {
+				precio = 6500.0;
+			} else if (pos.getCarrera().equals("Odontologia")) {
+				precio = 7500.0;
+			} else if (pos.getCarrera().equals("Psicologia")) {
+				precio = 6000.0;
+			}
+			sb.append(" <div class=\"row mt-4\">\r\n" + "                        <div class=\"col-2 text-center\">\r\n"
+					+ "                            <img\r\n" + "                                src=\""
+					+ context.getRealPath("/") + "WEB-INF/classes/co/edu/unbosque/model/persistance/" + pos.getFoto()
+					+ "\">\r\n" + "                        </div>\r\n" + "\r\n"
+					+ "                        <div class=\"col-10\">\r\n"
+					+ "                            <table class=\"table\">\r\n"
+					+ "                                <thead>\r\n" + "                                    <tr>\r\n"
+					+ "                                        <th>Apellidos</th>\r\n"
+					+ "                                        <th>Nombres</th>\r\n"
+					+ "                                        <th>Colegio</th>\r\n"
+					+ "                                        <th>Edad</th>\r\n"
+					+ "                                        <th>Carrera</th>\r\n"
+					+ "                                        <th>Valor</th>\r\n"
+					+ "                                        <th>Estrato</th>\r\n"
+					+ "                                        <th>Homologacion</th>\r\n"
+					+ "                                    </tr>\r\n" + "                                </thead>\r\n"
+					+ "                                <tbody>\r\n" + "                                    <tr>\r\n"
+					+ "                                        <td>" + pos.getApellidos() + "</td>\r\n"
+					+ "                                        <td>" + pos.getNombres() + "</td>\r\n"
+					+ "                                        <td>" + pos.getColegio() + "</td>\r\n"
+					+ "                                        <td>" + pos.getEdad() + "</td>\r\n"
+					+ "                                        <td>" + pos.getCarrera() + "</td>\r\n"
+					+ "                                        <td>" + precio + " M</td>\r\n"
+					+ "                                        <td>" + pos.getEstrato() + "</td>\r\n"
+					+ "                                        <td>" + homo + "</td>\r\n"
+					+ "                                    </tr>\r\n" + "                                </tbody>\r\n"
+					+ "                            </table>\r\n" + "                        </div>\r\n"
+					+ "                    </div>\r\n");
+		}
+		return sb.toString();
 	}
 }

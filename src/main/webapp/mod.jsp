@@ -3,11 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset='UTF-8'>
+<meta charset='utf-8'>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
 	crossorigin="anonymous"></script>
+<title>Sistema Postulados</title>
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
@@ -17,7 +18,7 @@
 
 body::before {
 	content: '';
-	background-color: rgba(0, 128, 0, 0.5);
+	background-color: rgba(127, 97, 2, 0.5);
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -53,17 +54,14 @@ body::before {
 	font-size: 20px;
 }
 </style>
-<title>Sistema Postulados</title>
-
 
 </head>
 <body class="ini">
-	<h1 class="d-block p-2 text-bg-success text-center">Universidad el
+	<h1 class="d-block p-2 text-bg-warning text-center">Universidad el
 		Bosque</h1>
 	<div class="container pt-lg-3">
-		<form class="row g-3 pb-lg-3 pt-lg-3"
-			action="http://localhost:8080/SistemaPostulados/ServletUser"
-			method="post" enctype="multipart/form-data" id="pr">
+		<form class="row g-3 pb-lg-3 pt-lg-3" action="http://localhost:8080/SistemaPostulados/ServletAdmin" method="post" id="pr">
+			<h2>Modificacion de datos</h2>
 			<div class="col-md-6">
 				<label class="form-label">Nombres</label> <input name="nombre"
 					type="text" class="form-control" pattern="[A-Za-z ]+"
@@ -76,13 +74,11 @@ body::before {
 			</div>
 			<div class="col-12">
 				<label class="form-label">Fecha de Nacimiento</label> <input
-					type="date" name="fecha" class="form-control" min="1904-01-01" max="2023-04-29"  required>
+					type="date" name="fecha" class="form-control" min="1904-01-01" max="2023-04-29" required>
 			</div>
 			<div class="col-12">
 				<label class="form-label">Colegio en el que se graduo</label> <input
-					type="text" name="colegio" class="form-control"
-					pattern="[A-Za-z ]+" title="No se permiten Simbolos ni Numeros"
-					required>
+					type="text" name="colegio" class="form-control" required>
 			</div>
 			<div class="col-md-6">
 				<label class="form-label">Carrera deseada</label> <select
@@ -124,7 +120,6 @@ body::before {
 					<option value="Psicologia">Psicología</option>
 				</select>
 			</div>
-
 			<div class="col-md-4">
 				<label class="form-label">Estrato</label> <select name="estrato"
 					class="form-select">
@@ -146,17 +141,18 @@ body::before {
 			<div>
 				<label for="formFile" class="form-label">Foto</label> <input
 					class="form-control" id="formFile" type="file" name="foto"
-					accept="image/jpeg, image/png" maxlength="2097152"
-					title="Suba una imagen en .jpeg o .png no mas de 2MB" required>
+					accept="image/jpeg, image/png"
+					title="Suba una imagen en .jpeg o
+            .png" required>
 			</div>
 			<div class="col-12">
-				<button type="submit" class="btn btn-primary">Ingresar
-					interesado</button>
+				<button type="submit" class="btn btn-primary">Modificar
+					Postulado</button>
 			</div>
 		</form>
-		<div class="position-fixed fixed-bottom fixed-right p-3">
-			<a class="btn btn-warning" href="adm.jsp">Administrar</a>
-		</div>
+	</div> 
+	<div class="position-fixed fixed-bottom fixed-right p-3">
+		<a class="btn btn-light" href="index.jsp">Ususario</a>
 	</div>
 </body>
 </html>

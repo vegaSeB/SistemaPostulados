@@ -3,6 +3,8 @@
  */
 package co.edu.unbosque.model.persistance;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -10,6 +12,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+import javax.swing.filechooser.FileSystemView;
 
 import com.opencsv.CSVWriter;
 
@@ -21,7 +25,7 @@ import jakarta.servlet.ServletContext;
  * File management class
  * 
  * @author Johan Silva
- * @author Miguel Linares
+ * @author Miguel Linarez
  */
 public class FileHandler {
 
@@ -96,24 +100,61 @@ public class FileHandler {
 
 	public static void generarCSV(ArrayList<PostuladoDTO> postulados, String fileName, ServletContext req) {
 		try {
-			FileWriter fw = new FileWriter(System.getProperty("user.home") + "/" + "Desktop/" + fileName);
-			CSVWriter csvW = new CSVWriter(fw, ';', CSVWriter.DEFAULT_QUOTE_CHARACTER,
-					CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
-			String[] encabezados = { "Nombre/s", "Apellido/s", "Colegio", "Carrera", "Estrato", "Fecha de nacimiento",
-					"Homologacion", "Edad", "Foto" };
-			csvW.writeNext(encabezados);
+			FileWriter fw = crearFileWriter(fileName, req);
+			if (fw != null) {
+				CSVWriter csvW = new CSVWriter(fw, ';', CSVWriter.DEFAULT_QUOTE_CHARACTER,
+						CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+				String[] encabezados = { "Nombre/s", "Apellido/s", "Colegio", "Carrera", "Estrato",
+						"Fecha de nacimiento", "Homologacion", "Edad", "Foto" };
+				csvW.writeNext(encabezados);
 
-			for (PostuladoDTO post : postulados) {
-				String[] fila = { post.getNombres(), post.getApellidos(), post.getColegio(), post.getCarrera(),
-						post.getEstrato(), post.getFecha().toString(), String.valueOf(post.isHomologacion()),
-						String.valueOf(post.getEdad()), post.getFoto() };
-				csvW.writeNext(fila);
+				for (PostuladoDTO post : postulados) {
+					String[] fila = { post.getNombres(), post.getApellidos(), post.getColegio(), post.getCarrera(),
+							post.getEstrato(), post.getFecha().toString(), String.valueOf(post.isHomologacion()),
+							String.valueOf(post.getEdad()), post.getFoto() };
+					csvW.writeNext(fila);
+				}
+
+				csvW.close();
+				VistaConsola.msm("CSV file created/updated successfully", req);
+			} else {
+				VistaConsola.msm(
+						"Continuing with the execution of the program without generating/updating csv.\nPlease provide the necessary permissions to write on the desktop.",
+						req);
 			}
-
-			csvW.close();
-			VistaConsola.msm("CSV file updated successfully", req);
 		} catch (Exception e) {
 			VistaConsola.err("CSV file updated incorrectly due to the following error", e.getLocalizedMessage(), req);
+		}
+	}
+
+	private static FileWriter crearFileWriter(String fileName, ServletContext req) {
+
+		String escritorio = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
+
+		File archivo = new File(escritorio + "/" + fileName);
+
+		if (!archivo.canWrite()) {
+			VistaConsola
+					.msm("To create/update the file on the desktop, write permissions are required, please grant them."
+							+ "- How to do it in windows: https://www.kakasoft.com/copy-protection/change-file-folder-permission-windows/\n"
+							+ "- How to do it in linux (Ubuntu): https://askubuntu.com/questions/6723/change-folder-permissions-and-ownership\n"
+							+ "\nOpening the desktop directory in file explorer...", req);
+			try {
+				Desktop.getDesktop().open(new File(escritorio));
+			} catch (IOException e) {
+				VistaConsola.err("Cannot open desktop directory.", e.getLocalizedMessage(), req);
+			} finally {
+				VistaConsola.msm(
+						"File not created/updated because you do not have write permissions on the desktop.\nPlease provide the permissions before the next attempt to update the csv",
+						req);
+			}
+			return null;
+		} else {
+			try {
+				return new FileWriter(archivo);
+			} catch (IOException e) {
+				return null;
+			}
 		}
 	}
 }
