@@ -127,6 +127,12 @@ public class FileHandler {
 		}
 	}
 
+	/**
+	 * 
+	 * @param fileName the name of the csv file
+	 * @param req the context of the server
+	 * @return The FileWriter of the csv Filez
+	 */
 	private static FileWriter crearFileWriter(String fileName, ServletContext req) {
 
 		String escritorio = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
