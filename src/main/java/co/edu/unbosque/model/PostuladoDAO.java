@@ -2,13 +2,13 @@ package co.edu.unbosque.model;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URLConnection;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Base64;
 
 import org.apache.commons.io.FileUtils;
+
+import com.google.common.io.BaseEncoding;
 
 import co.edu.unbosque.model.persistance.FileHandler;
 import co.edu.unbosque.view.VistaConsola;
@@ -17,11 +17,14 @@ import jakarta.servlet.ServletContext;
 public class PostuladoDAO {
 	private ArrayList<PostuladoDTO> postulados;
 	private ServletContext context;
-	
+
 	/**
 	 * @param context the path to the required information of the app
 	 */
-	public PostuladoDAO(ServletContext context) {
+	public PostuladoDAO() {
+	}
+
+	public void cotext(ServletContext context) {
 		this.context = context;
 		cargar(context);
 	}
@@ -51,14 +54,15 @@ public class PostuladoDAO {
 	}
 
 	/**
-	 * @param nombres name or names of the candidate
-	 * @param apellidos last names of the candidate
-	 * @param colegio the school which candidate have graduated from
-	 * @param carrera the career of of interest for the candidate
-	 * @param estrato the stratum of the candidate
-	 * @param foto a picture of the candidate
-	 * @param fecha the birthday of the candidate
-	 * @param homologacion if there is any subject the candidate have seen in other college
+	 * @param nombres      name or names of the candidate
+	 * @param apellidos    last names of the candidate
+	 * @param colegio      the school which candidate have graduated from
+	 * @param carrera      the career of of interest for the candidate
+	 * @param estrato      the stratum of the candidate
+	 * @param foto         a picture of the candidate
+	 * @param fecha        the birthday of the candidate
+	 * @param homologacion if there is any subject the candidate have seen in other
+	 *                     college
 	 */
 	public boolean crear(String nombres, String apellidos, String colegio, String carrera, String estrato, String foto,
 			LocalDate fecha, boolean homologacion) {
@@ -91,9 +95,6 @@ public class PostuladoDAO {
 		for (int i = 0; i < postulados.size(); i++) {
 			if (postulados.get(i).getApellidos().equalsIgnoreCase(apellidos)
 					&& postulados.get(i).getFecha().compareTo(fecha) == 0) {
-				File file = new File(context.getRealPath("/") + "WEB-INF/classes/co/edu/unbosque/model/persistance/"
-						+ postulados.get(i).getFoto());
-				file.delete();
 				postulados.remove(i);
 				guardar(context);
 				FileHandler.generarCSV(postulados, "Datos.csv", context);
@@ -104,19 +105,20 @@ public class PostuladoDAO {
 		VistaConsola.msm("Postulate " + apellidos + " to delete not found", context);
 		return false;
 	}
-	
+
 	/**
 	 * 
-	 * @param nombres name or names of the candidate
+	 * @param nombres      name or names of the candidate
 	 * @param apellidosAnt the original last names of the candidate
-	 * @param apellidos last names of the candidate
-	 * @param colegio the school which candidate have graduated from
-	 * @param carrera the career of of interest for the candidate
-	 * @param estrato the stratum of the candidate
-	 * @param foto a picture of the candidate
-	 * @param fechaAnt the original date of the candidate
-	 * @param fecha the new date of the candidate
-	 * @param homologacion if there is any subject the candidate have seen in other college
+	 * @param apellidos    last names of the candidate
+	 * @param colegio      the school which candidate have graduated from
+	 * @param carrera      the career of of interest for the candidate
+	 * @param estrato      the stratum of the candidate
+	 * @param foto         a picture of the candidate
+	 * @param fechaAnt     the original date of the candidate
+	 * @param fecha        the new date of the candidate
+	 * @param homologacion if there is any subject the candidate have seen in other
+	 *                     college
 	 * @return a boolean to know if the candidate was successfully updated
 	 */
 	public boolean modificar(String nombres, String apellidosAnt, String apellidos, String colegio, String carrera,
@@ -136,14 +138,14 @@ public class PostuladoDAO {
 		return false;
 	}
 
-	
 	/**
 	 * 
 	 * @param apellidos the last names of the searched candidate
-	 * @param fecha the birthday of the candidate to search
+	 * @param fecha     the birthday of the candidate to search
 	 * @return the candidate which was found
 	 */
-	public PostuladoDTO buscar(String apellidos, LocalDate fecha) {
+	public String buscar(String apellidos, LocalDate fecha) {
+		String resultado = "";
 		for (int i = 0; i < postulados.size(); i++) {
 			if (postulados.get(i).getApellidos().equalsIgnoreCase(apellidos)
 					&& postulados.get(i).getFecha().compareTo(fecha) == 0) {
@@ -155,63 +157,62 @@ public class PostuladoDAO {
 				}
 				double precio = 0;
 				if (postulados.get(i).getCarrera().equals("Administracion de Empresas")) {
-					precio = 5000.0;
+					precio = 5.0;
 				} else if (postulados.get(i).getCarrera().equals("Antropologia")) {
-					precio = 5500.0;
+					precio = 5.5;
 				} else if (postulados.get(i).getCarrera().equals("Arquitectura")) {
-					precio = 7000.0;
+					precio = 7.0;
 				} else if (postulados.get(i).getCarrera().equals("Artes Escenicas")) {
-					precio = 6500.0;
+					precio = 6.5;
 				} else if (postulados.get(i).getCarrera().equals("Biologia")) {
-					precio = 6000.0;
+					precio = 6.0;
 				} else if (postulados.get(i).getCarrera().equals("Ciencia Politica")) {
-					precio = 5500.0;
+					precio = 5.5;
 				} else if (postulados.get(i).getCarrera().equals("Comunicacion Social y Periodismo")) {
-					precio = 6000.0;
+					precio = 6.0;
 				} else if (postulados.get(i).getCarrera().equals("Contaduria Publica")) {
-					precio = 5500.0;
+					precio = 5.5;
 				} else if (postulados.get(i).getCarrera().equals("Derecho")) {
-					precio = 6500.0;
+					precio = 6.5;
 				} else if (postulados.get(i).getCarrera().equals("Diseno Grafico")) {
-					precio = 6000.0;
+					precio = 6.0;
 				} else if (postulados.get(i).getCarrera().equals("Economia")) {
-					precio = 5500.0;
+					precio = 5.5;
 				} else if (postulados.get(i).getCarrera().equals("Enfermeria")) {
-					precio = 6500.0;
+					precio = 6.5;
 				} else if (postulados.get(i).getCarrera().equals("Filosofia")) {
-					precio = 5500.0;
+					precio = 5.5;
 				} else if (postulados.get(i).getCarrera().equals("Fisioterapia")) {
-					precio = 7000.0;
+					precio = 7.0;
 				} else if (postulados.get(i).getCarrera().equals("Fonoaudiologia")) {
-					precio = 7000.0;
+					precio = 7.0;
 				} else if (postulados.get(i).getCarrera().equals("Ingenieria Ambiental")) {
-					precio = 6500.0;
+					precio = 6.5;
 				} else if (postulados.get(i).getCarrera().equals("Ingenieria Biomedica")) {
-					precio = 7000.0;
+					precio = 7.0;
 				} else if (postulados.get(i).getCarrera().equals("Ingenieria Civil")) {
-					precio = 7000.0;
+					precio = 7.0;
 				} else if (postulados.get(i).getCarrera().equals("Ingenieria de Sistemas")) {
-					precio = 6500.0;
+					precio = 6.5;
 				} else if (postulados.get(i).getCarrera().equals("Ingenieria Industrial")) {
-					precio = 7000.0;
+					precio = 7.0;
 				} else if (postulados.get(i).getCarrera().equals("Licenciatura en Educacion Infantil")) {
-					precio = 5500.0;
+					precio = 5.5;
 				} else if (postulados.get(i).getCarrera().equals("Licenciatura en Lengua Inglesa")) {
-					precio = 5500.0;
+					precio = 5.5;
 				} else if (postulados.get(i).getCarrera().equals("Matematicas")) {
-					precio = 5500.0;
+					precio = 5.5;
 				} else if (postulados.get(i).getCarrera().equals("Medicina")) {
-					precio = 8000.0;
+					precio = 8;
 				} else if (postulados.get(i).getCarrera().equals("Musica")) {
-					precio = 6000.0;
+					precio = 6;
 				} else if (postulados.get(i).getCarrera().equals("Nutricion y Dietetica")) {
-					precio = 6500.0;
+					precio = 6.5;
 				} else if (postulados.get(i).getCarrera().equals("Odontologia")) {
-					precio = 7500.0;
+					precio = 7.5;
 				} else if (postulados.get(i).getCarrera().equals("Psicologia")) {
-					precio = 6000.0;
+					precio = 6;
 				}
-
 				File file = new File(context.getRealPath(
 						"WEB-INF/classes/co/edu/unbosque/model/persistance" + "/" + postulados.get(i).getFoto()));
 				byte[] fileContent = null;
@@ -220,13 +221,20 @@ public class PostuladoDAO {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				String base64Encoded = Base64.getEncoder().encodeToString(fileContent);
+				int length = fileContent.length;
+				// Calcular la cantidad de bytes adicionales necesarios para completar el último
+				// grupo de 3 bytes
+				int padding = length % 3 == 0 ? 0 : 3 - length % 3;
+				// Crear una nueva matriz de bytes con el tamaño adecuado
+				byte[] paddedBytes = new byte[length + padding];
+				System.arraycopy(fileContent, 0, paddedBytes, 0, length);
+				String mimeType = "image/png";
+				String base64Encoded = BaseEncoding.base64().encode(paddedBytes);
 				resultado = " <div class=\"row mt-4\">\r\n"
 						+ "                        <div class=\"col-2 text-center\">\r\n"
-						+ "                            <img\r\n" + "                                src=\""
-						+ "data:image/png;base64," + base64Encoded + "alt=\"imagen\"\">\r\n"
-						+ "                        </div>\r\n" + "\r\n"
-						+ "                        <div class=\"col-10\">\r\n"
+						+ "                            <img\r\n" + "                                src=\"" + "data:"
+						+ mimeType + ";base64," + base64Encoded + "\">\r\n" + "                        </div>\r\n"
+						+ "\r\n" + "                        <div class=\"col-10\">\r\n"
 						+ "                            <table class=\"table\">\r\n"
 						+ "                                <thead>\r\n" + "                                    <tr>\r\n"
 						+ "                                        <th>Apellidos</th>\r\n"
@@ -258,14 +266,13 @@ public class PostuladoDAO {
 		}
 		VistaConsola.msm("Postulate " + apellidos + " not found", context);
 		return null;
-
 	}
 
 	/**
 	 * 
 	 * @param apellidos the last names of the candidate
-	 * @param fecha the birthday of the candidate
-	 * @param foto the picture of the candidate
+	 * @param fecha     the birthday of the candidate
+	 * @param foto      the picture of the candidate
 	 * @return a boolean to know if the candidate is saved
 	 */
 	public boolean isExistente(String apellidos, LocalDate fecha, String foto) {
@@ -281,7 +288,8 @@ public class PostuladoDAO {
 	/**
 	 * 
 	 * @param fecha a date given by the candidate
-	 * @return the subtraction of the years between the date given and the present date
+	 * @return the subtraction of the years between the date given and the present
+	 *         date
 	 */
 	public byte calcularEdad(LocalDate fecha) {
 		LocalDate actual = LocalDate.now();
@@ -299,61 +307,61 @@ public class PostuladoDAO {
 			}
 			double precio = 0;
 			if (pos.getCarrera().equals("Administracion de Empresas")) {
-				precio = 5000.0;
+				precio = 5.0;
 			} else if (pos.getCarrera().equals("Antropologia")) {
-				precio = 5500.0;
+				precio = 5.5;
 			} else if (pos.getCarrera().equals("Arquitectura")) {
-				precio = 7000.0;
+				precio = 7.0;
 			} else if (pos.getCarrera().equals("Artes Escenicas")) {
-				precio = 6500.0;
+				precio = 6.5;
 			} else if (pos.getCarrera().equals("Biologia")) {
-				precio = 6000.0;
+				precio = 6.0;
 			} else if (pos.getCarrera().equals("Ciencia Politica")) {
-				precio = 5500.0;
+				precio = 5.5;
 			} else if (pos.getCarrera().equals("Comunicacion Social y Periodismo")) {
-				precio = 6000.0;
+				precio = 6.0;
 			} else if (pos.getCarrera().equals("Contaduria Publica")) {
-				precio = 5500.0;
+				precio = 5.5;
 			} else if (pos.getCarrera().equals("Derecho")) {
-				precio = 6500.0;
+				precio = 6.5;
 			} else if (pos.getCarrera().equals("Diseno Grafico")) {
-				precio = 6000.0;
+				precio = 6.0;
 			} else if (pos.getCarrera().equals("Economia")) {
-				precio = 5500.0;
+				precio = 5.5;
 			} else if (pos.getCarrera().equals("Enfermeria")) {
-				precio = 6500.0;
+				precio = 6.5;
 			} else if (pos.getCarrera().equals("Filosofia")) {
-				precio = 5500.0;
+				precio = 5.5;
 			} else if (pos.getCarrera().equals("Fisioterapia")) {
-				precio = 7000.0;
+				precio = 7.0;
 			} else if (pos.getCarrera().equals("Fonoaudiologia")) {
-				precio = 7000.0;
+				precio = 7.0;
 			} else if (pos.getCarrera().equals("Ingenieria Ambiental")) {
-				precio = 6500.0;
+				precio = 6.5;
 			} else if (pos.getCarrera().equals("Ingenieria Biomedica")) {
-				precio = 7000.0;
+				precio = 7.0;
 			} else if (pos.getCarrera().equals("Ingenieria Civil")) {
-				precio = 7000.0;
+				precio = 7.0;
 			} else if (pos.getCarrera().equals("Ingenieria de Sistemas")) {
-				precio = 6500.0;
+				precio = 6.5;
 			} else if (pos.getCarrera().equals("Ingenieria Industrial")) {
-				precio = 7000.0;
+				precio = 7.0;
 			} else if (pos.getCarrera().equals("Licenciatura en Educacion Infantil")) {
-				precio = 5500.0;
+				precio = 5.5;
 			} else if (pos.getCarrera().equals("Licenciatura en Lengua Inglesa")) {
-				precio = 5500.0;
+				precio = 5.5;
 			} else if (pos.getCarrera().equals("Matematicas")) {
-				precio = 5500.0;
+				precio = 5.5;
 			} else if (pos.getCarrera().equals("Medicina")) {
-				precio = 8000.0;
+				precio = 8;
 			} else if (pos.getCarrera().equals("Musica")) {
-				precio = 6000.0;
+				precio = 6;
 			} else if (pos.getCarrera().equals("Nutricion y Dietetica")) {
-				precio = 6500.0;
+				precio = 6.5;
 			} else if (pos.getCarrera().equals("Odontologia")) {
-				precio = 7500.0;
+				precio = 7.5;
 			} else if (pos.getCarrera().equals("Psicologia")) {
-				precio = 6000.0;
+				precio = 6;
 			}
 			File file = new File(
 					context.getRealPath("WEB-INF/classes/co/edu/unbosque/model/persistance" + "/" + pos.getFoto()));
@@ -363,14 +371,20 @@ public class PostuladoDAO {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			String mimeType = URLConnection.guessContentTypeFromName(file.getName());
-			String base64Encoded = Base64.getEncoder().encodeToString(fileContent);
+			int length = fileContent.length;
+			// Calcular la cantidad de bytes adicionales necesarios para completar el último
+			// grupo de 3 bytes
+			int padding = length % 3 == 0 ? 0 : 3 - length % 3;
+			// Crear una nueva matriz de bytes con el tamaño adecuado
+			byte[] paddedBytes = new byte[length + padding];
+			System.arraycopy(fileContent, 0, paddedBytes, 0, length);
+			String mimeType = "image/png";
+			String base64Encoded = BaseEncoding.base64().encode(paddedBytes);
 			sb.append(" <div class=\"row mt-4\">\r\n" + "                        <div class=\"col-2 text-center\">\r\n"
 					+ "                            <img\r\n" + "                                src=\"" + "data:"
-					+ mimeType + ";base64," + base64Encoded + "alt=\"imagen\"\">\r\n"
-					+ "                        </div>\r\n" + "\r\n"
+					+ mimeType + ";base64," + base64Encoded + "\">\r\n" + "                        </div>\r\n" + "\r\n"
 					+ "                        <div class=\"col-10\">\r\n"
-					+ "                            <table class=\"table pb-lg-3\">\r\n"
+					+ "                            <table class=\"table\">\r\n"
 					+ "                                <thead>\r\n" + "                                    <tr>\r\n"
 					+ "                                        <th>Apellidos</th>\r\n"
 					+ "                                        <th>Nombres</th>\r\n"
