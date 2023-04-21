@@ -11,7 +11,9 @@
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
-@import url(https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css);
+@import
+	url(https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css)
+	;
 
 body::before {
 	content: '';
@@ -31,6 +33,8 @@ body::before {
 		url("https://tecnomarketingnews.com/wp-content/uploads/2016/08/ubosquejpfg.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-attachment: fixed;
+    overflow: scroll;
 	position: relative;
 	margin: 0;
 	padding: 0;
@@ -57,7 +61,9 @@ body::before {
 	<h1 class="d-block p-2 text-bg-success text-center">Universidad el
 		Bosque</h1>
 	<div class="container pt-lg-3">
-		<form class="row g-3 pb-lg-3 pt-lg-3" action="http://localhost:8080/SistemaPostulados/ServletUser" method="post" id="pr" >
+		<form class="row g-3 pb-lg-3 pt-lg-3"
+			action="http://localhost:8080/SistemaPostulados/ServletUser"
+			method="post" enctype="multipart/form-data" id="pr">
 			<div class="col-md-6">
 				<label class="form-label">Nombres</label> <input name="nombre"
 					type="text" class="form-control" pattern="[A-Za-z ]+"
@@ -70,50 +76,55 @@ body::before {
 			</div>
 			<div class="col-12">
 				<label class="form-label">Fecha de Nacimiento</label> <input
-					type="date" name="fecha" class="form-control" required>
+					type="date" name="fecha" class="form-control" min="1904-01-01" max="2023-04-29"  required>
 			</div>
 			<div class="col-12">
 				<label class="form-label">Colegio en el que se graduo</label> <input
-					type="text" name="colegio" class="form-control" pattern="[A-Za-z ]+" title="No se permiten Simbolos ni Numeros"  required>
+					type="text" name="colegio" class="form-control"
+					pattern="[A-Za-z ]+" title="No se permiten Simbolos ni Numeros"
+					required>
 			</div>
 			<div class="col-md-6">
 				<label class="form-label">Carrera deseada</label> <select
 					name="carrera" class="form-select">
-					<option value selected=“AdministracióndeEmpresas”>Administración
+					<option value="Administracion de Empresas" selected>Administración
 						de Empresas</option>
-					<option value=“Antropología”>Antropología</option>
-					<option value=“Arquitectura”>Arquitectura</option>
-					<option value=“ArtesEscénicas”>Artes Escénicas</option>
-					<option value=“Biología”>Biología</option>
-					<option value=“CienciaPolítica”>Ciencia Política</option>
-					<option value=“ComunicaciónSocialyPeriodismo”>Comunicación
+					<option value="Antropologia">Antropología</option>
+					<option value="Arquitectura">Arquitectura</option>
+					<option value="Artes Escenicas">Artes Escénicas</option>
+					<option value="Biologia">Biología</option>
+					<option value="Ciencia Politica">Ciencia Política</option>
+					<option value="Comunicacion Social y Periodismo">Comunicación
 						Social y Periodismo</option>
-					<option value=“ContaduríaPública”>Contaduría Pública</option>
-					<option value=“Derecho”>Derecho</option>
-					<option value=“DiseñoGráfico”>Diseño Gráfico</option>
-					<option value=“Economía”>Economía</option>
-					<option value=“Enfermería”>Enfermería</option>
-					<option value=“Filosofía”>Filosofía</option>
-					<option value=“Fisioterapia”>Fisioterapia</option>
-					<option value=“Fonoaudiología”>Fonoaudiología</option>
-					<option value=“IngenieríaAmbiental”>Ingeniería Ambiental</option>
-					<option value=“IngenieríaBiomédica”>Ingeniería Biomédica</option>
-					<option value=“IngenieríaCivil”>Ingeniería Civil</option>
-					<option value=“IngenieríadeSistemas”>Ingeniería de
+					<option value="Contaduria Publica">Contaduría Pública</option>
+					<option value="Derecho">Derecho</option>
+					<option value="Diseno Grafico">Diseño Gráfico</option>
+					<option value="Economia">Economía</option>
+					<option value="Enfermeria">Enfermería</option>
+					<option value="Filosofia">Filosofía</option>
+					<option value="Fisioterapia">Fisioterapia</option>
+					<option value="Fonoaudiologia">Fonoaudiología</option>
+					<option value="Ingenieria Ambiental">Ingeniería Ambiental</option>
+					<option value="Ingenieria Biomedica">Ingeniería Biomédica</option>
+					<option value="Ingenieria Civil">Ingeniería Civil</option>
+					<option value="Ingenieria de Sistemas">Ingeniería de
 						Sistemas</option>
-					<option value=“IngenieríaIndustrial”>Ingeniería Industrial</option>
-					<option value=“LicenciaturaenEducaciónInfantil”>Licenciatura
+					<option value="Ingenieria Industrial">Ingeniería
+						Industrial</option>
+					<option value="Licenciatura en Educacion Infantil">Licenciatura
 						en Educación Infantil</option>
-					<option value=“LicenciaturaenLenguaInglesa”>Licenciatura
+					<option value="Licenciatura en Lengua Inglesa">Licenciatura
 						en Lengua Inglesa</option>
-					<option value=“Matemáticas”>Matemáticas</option>
-					<option value=“Medicina”>Medicina</option>
-					<option value=“Música”>Música</option>
-					<option value=“NutriciónyDietética”>Nutrición y Dietética</option>
-					<option value=“Odontología”>Odontología</option>
-					<option value=“Psicología”>Psicología</option>
+					<option value="Matematicas">Matemáticas</option>
+					<option value="Medicina">Medicina</option>
+					<option value="Musica">Música</option>
+					<option value="Nutricion y Dietetica">Nutrición y
+						Dietética</option>
+					<option value="Odontologia">Odontología</option>
+					<option value="Psicologia">Psicología</option>
 				</select>
 			</div>
+
 			<div class="col-md-4">
 				<label class="form-label">Estrato</label> <select name="estrato"
 					class="form-select">
@@ -135,8 +146,8 @@ body::before {
 			<div>
 				<label for="formFile" class="form-label">Foto</label> <input
 					class="form-control" id="formFile" type="file" name="foto"
-					accept="image/jpeg, image/png"
-					title="Suba una imagen en .jpeg o .png" required>
+					accept="image/jpeg, image/png" maxlength="2097152"
+					title="Suba una imagen en .jpeg o .png no mas de 2MB" required>
 			</div>
 			<div class="col-12">
 				<button type="submit" class="btn btn-primary">Ingresar
