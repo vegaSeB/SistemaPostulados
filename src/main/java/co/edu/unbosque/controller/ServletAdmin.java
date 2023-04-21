@@ -25,8 +25,11 @@ import jakarta.servlet.http.Part;
 public class ServletAdmin extends HttpServlet {
 	private PostuladoDAO postul;
 
+	/**
+	 * The constructor method of the Servlet
+	 */
 	public ServletAdmin() {
-		postul = new PostuladoDAO(null);
+		postul = new PostuladoDAO();
 	}
 
 	@Override
@@ -34,7 +37,7 @@ public class ServletAdmin extends HttpServlet {
 
 		String referer = req.getHeader("Referer");
 		if (referer != null && referer.contains("adm.jsp")) {
-			postul.setContext(this.getServletContext());
+			postul.cotext(this.getServletContext());
 			PrintWriter salida = new PrintWriter(resp.getWriter());
 			salida.println("<!DOCTYPE html>\r\n" + "<html>\r\n" + "    <head>\r\n"
 					+ "        <meta charset='utf-8'>\r\n" + "        <script\r\n"
@@ -66,7 +69,7 @@ public class ServletAdmin extends HttpServlet {
 					+ "    </body>\r\n" + "</html>");
 			salida.close();
 		} else if (referer != null && referer.contains("bus.jsp")) {
-			postul.setContext(this.getServletContext());
+			postul.cotext(this.getServletContext());
 			PrintWriter salida = new PrintWriter(resp.getWriter());
 			String apell = req.getParameter("apellido");
 			LocalDate fecha = LocalDate.parse(req.getParameter("fecha"));
@@ -151,7 +154,7 @@ public class ServletAdmin extends HttpServlet {
 			String homo = req.getParameter("homo");
 			String foto = "";
 			boolean isHomo = false;
-			postul.setContext(this.getServletContext());
+			postul.cotext(this.getServletContext());
 
 			if (homo.equalsIgnoreCase("si")) {
 				isHomo = true;
@@ -257,7 +260,7 @@ public class ServletAdmin extends HttpServlet {
 		} else if (referer != null && referer.contains("eli.jsp")) {
 			String apell = req.getParameter("apellido");
 			LocalDate fecha = LocalDate.parse(req.getParameter("fecha"));
-			postul.setContext(this.getServletContext());
+			postul.cotext(this.getServletContext());
 			PrintWriter salida = new PrintWriter(resp.getWriter());
 			boolean ok = postul.eliminar(apell, fecha);
 			if (ok) {

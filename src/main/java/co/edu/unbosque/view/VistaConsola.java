@@ -12,6 +12,11 @@ import jakarta.servlet.ServletContext;
 
 public class VistaConsola {
 
+	/**
+	 * A method to show a message to the console if it is needed
+	 * @param msm the message to be shown
+	 * @param req the context of the server
+	 */
 	public static void msm(String msm, ServletContext req) {
 		try {
 			System.setOut(new PrintStream(System.out, true, "UTF-8"));
@@ -25,6 +30,12 @@ public class VistaConsola {
 				LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMM dd, YYYY h:mm:ss a")) + ": " + msm, req);
 	}
 
+	/**
+	 * This shows a messages and the error when something goes wrong in the program
+	 * @param msm the message of the cause of the error
+	 * @param err the error message
+	 * @param req the server context
+	 */
 	public static void err(String msm, String err, ServletContext req) {
 		try {
 			System.setOut(new PrintStream(System.out, true, "UTF-8"));
