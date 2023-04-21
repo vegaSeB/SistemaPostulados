@@ -11,5 +11,5 @@ The idea of this proyect was to create a [crud](https://es.wikipedia.org/wiki/CR
 - [CRUD](https://es.wikipedia.org/wiki/CRUD)
 - [DAO-DTO](https://rjcodeadvance.com/patrones-de-software-que-es-patron-de-diseno-parte-2/#:~:text=Patrón%20Data%20Transfer%20Object%20(DTO,a%20la%20fuente%20de%20datos. )
 - [Persintencia](https://www.adictosaltrabajo.com/2007/03/15/persistencia-java/)
-- [Apache-tomcat] (https://tomcat.apache.org)
+- [Apache/tomcat](https://tomcat.apache.org)
 > It is recomendable to use [EclipseIDE](https://www.eclipse.org/downloads/) for the modification of the code.
