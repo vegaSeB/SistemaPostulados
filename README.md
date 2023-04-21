@@ -1,7 +1,7 @@
 # Sistema Postulados
-## Descripción
+## Description
 This repository was developed by [VegaSeB](https://github.com/vegaSeB) , [FeelingMoon](https://github.com/FeelingMoon) y [MikaNiatsu](https://github.com/MikaNiatsu), as an web solution created to "Universidad ElBosque", designed for the better managment of the students interested in the college.
-### Ambiente
+### Enviroment
 This whole proyect was designed in java, with the Eclipse IDE, with the apache tomcat servlets.
 ## Abstract
 The idea of this proyect was to create a [crud](https://es.wikipedia.org/wiki/CRUD), furthermore it was created to let anyone use and learn about this code because of the use of GNU General Public License v3.0, which can be found in [license.txt](https://github.com/vegaSeB/RecursosHumanos/blob/main/LICENSE)
