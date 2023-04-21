@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @SuppressWarnings("serial")
+/**
+ * The DTO class
+ * 
+ * @author Johan Silva
+ * @author Sebastian Vega
+ * @author Miguel Linarez
+ */
 public class PostuladoDTO implements Serializable {
 	private String nombres;
 	private String apellidos;

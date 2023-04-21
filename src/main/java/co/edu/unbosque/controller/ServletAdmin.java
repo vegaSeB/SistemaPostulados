@@ -22,6 +22,13 @@ import jakarta.servlet.http.Part;
 
 @SuppressWarnings("serial")
 @MultipartConfig
+/**
+ * The servlet of the admin pages
+ * 
+ * @author Johan Silva
+ * @author Sebastian Vega
+ * @author Miguel Linarez
+ */
 public class ServletAdmin extends HttpServlet {
 	private PostuladoDAO postul;
 

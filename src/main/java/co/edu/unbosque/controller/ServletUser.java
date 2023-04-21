@@ -24,6 +24,13 @@ import java.io.PrintWriter;
 
 @SuppressWarnings("serial")
 @MultipartConfig
+/**
+ * The servlet of the user pages
+ * 
+ * @author Johan Silva
+ * @author Sebastian Vega
+ * @author Miguel Linarez
+ */
 public class ServletUser extends HttpServlet {
 
 	private PostuladoDAO postul;

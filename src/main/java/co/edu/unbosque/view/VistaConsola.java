@@ -10,6 +10,13 @@ import java.time.format.DateTimeFormatter;
 import co.edu.unbosque.model.persistance.FileHandler;
 import jakarta.servlet.ServletContext;
 
+/**
+ * The console view class
+ * 
+ * @author Johan Silva
+ * @author Sebastian Vega
+ * @author Miguel Linarez
+ */
 public class VistaConsola {
 
 	/**
