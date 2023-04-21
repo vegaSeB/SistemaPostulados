@@ -31,6 +31,7 @@ public class PostuladoDAO {
 
 	@SuppressWarnings("unchecked")
 	/**
+	 * Gets the saved ArrayList on the file into the class ArrayList
 	 * @param context the path to the required information of the app
 	 */
 	public void cargar(ServletContext cont) {
@@ -46,6 +47,7 @@ public class PostuladoDAO {
 	}
 
 	/**
+	 * Saves the ArrayList of the class into the File
 	 * @param context the path to the required information of the app
 	 */
 	public void guardar(ServletContext cont) {
@@ -54,15 +56,16 @@ public class PostuladoDAO {
 	}
 
 	/**
-	 * @param nombres      name or names of the candidate
-	 * @param apellidos    last names of the candidate
-	 * @param colegio      the school which candidate have graduated from
-	 * @param carrera      the career of of interest for the candidate
-	 * @param estrato      the stratum of the candidate
-	 * @param foto         a picture of the candidate
-	 * @param fecha        the birthday of the candidate
-	 * @param homologacion if there is any subject the candidate have seen in other
-	 *                     college
+	 * Creates a new PostuladoDTO 
+	 * @param nombres name or names of the candidate
+	 * @param apellidos last names of the candidate
+	 * @param colegio the school which candidate have graduated from
+	 * @param carrera the career of of interest for the candidate
+	 * @param estrato the stratum of the candidate
+	 * @param foto a picture of the candidate
+	 * @param fecha the birthday of the candidate
+	 * @param homologacion if there is any subject the candidate have seen in other college
+	 * @return a validation to know if the PostuladoDTO was created successfully
 	 */
 	public boolean crear(String nombres, String apellidos, String colegio, String carrera, String estrato, String foto,
 			LocalDate fecha, boolean homologacion) {
@@ -87,6 +90,7 @@ public class PostuladoDAO {
 	}
 
 	/**
+	 * A method to search and delete a PostuladoDTO
 	 * @param apellidos
 	 * @param fecha
 	 * @return a boolean to know if the candidate has been successfully deleted
@@ -107,8 +111,8 @@ public class PostuladoDAO {
 	}
 
 	/**
-	 * 
-	 * @param nombres      name or names of the candidate
+	 * A method to modify an PostuladoDTO
+	 * @param nombres name or names of the candidate
 	 * @param apellidosAnt the original last names of the candidate
 	 * @param apellidos    last names of the candidate
 	 * @param colegio      the school which candidate have graduated from
@@ -139,7 +143,7 @@ public class PostuladoDAO {
 	}
 
 	/**
-	 * 
+	 * A method to search an PostuladoDTO with the last name and the birth date
 	 * @param apellidos the last names of the searched candidate
 	 * @param fecha     the birthday of the candidate to search
 	 * @return the candidate which was found
@@ -222,10 +226,10 @@ public class PostuladoDAO {
 					e.printStackTrace();
 				}
 				int length = fileContent.length;
-				// Calcular la cantidad de bytes adicionales necesarios para completar el último
+				// Calcular la cantidad de bytes adicionales necesarios para completar el ï¿½ltimo
 				// grupo de 3 bytes
 				int padding = length % 3 == 0 ? 0 : 3 - length % 3;
-				// Crear una nueva matriz de bytes con el tamaño adecuado
+				// Crear una nueva matriz de bytes con el tamaï¿½o adecuado
 				byte[] paddedBytes = new byte[length + padding];
 				System.arraycopy(fileContent, 0, paddedBytes, 0, length);
 				String mimeType = "image/png";
@@ -269,7 +273,7 @@ public class PostuladoDAO {
 	}
 
 	/**
-	 * 
+	 * A method to verify a PostuladoDTO is saved on the ArrayList
 	 * @param apellidos the last names of the candidate
 	 * @param fecha     the birthday of the candidate
 	 * @param foto      the picture of the candidate
@@ -286,7 +290,7 @@ public class PostuladoDAO {
 	}
 
 	/**
-	 * 
+	 * Calculates the difference between the present date and the PostuladoDTO birth day
 	 * @param fecha a date given by the candidate
 	 * @return the subtraction of the years between the date given and the present
 	 *         date
@@ -296,6 +300,10 @@ public class PostuladoDAO {
 		return (byte) fecha.until(actual, ChronoUnit.YEARS);
 	}
 
+	/**
+	 * Uses the class ArrayList and transforms it and String to use in an html file
+	 * @return An String which will be used in an html file
+	 */
 	public String getPostulados() {
 		StringBuilder sb = new StringBuilder("");
 		for (PostuladoDTO pos : postulados) {
@@ -372,10 +380,10 @@ public class PostuladoDAO {
 				e.printStackTrace();
 			}
 			int length = fileContent.length;
-			// Calcular la cantidad de bytes adicionales necesarios para completar el último
+			// Calcular la cantidad de bytes adicionales necesarios para completar el ï¿½ltimo
 			// grupo de 3 bytes
 			int padding = length % 3 == 0 ? 0 : 3 - length % 3;
-			// Crear una nueva matriz de bytes con el tamaño adecuado
+			// Crear una nueva matriz de bytes con el tamaï¿½o adecuado
 			byte[] paddedBytes = new byte[length + padding];
 			System.arraycopy(fileContent, 0, paddedBytes, 0, length);
 			String mimeType = "image/png";
@@ -410,4 +418,21 @@ public class PostuladoDAO {
 		}
 		return sb.toString();
 	}
+
+	/**
+	 * Gets the actual context that the class has
+	 * @return The class context
+	 */
+	public ServletContext getContext() {
+		return context;
+	}
+
+	/**
+	 * Sets the class context to a new one
+	 * @param context the new context of the class
+	 */
+	public void setContext(ServletContext context) {
+		this.context = context;
+	}
+	
 }
