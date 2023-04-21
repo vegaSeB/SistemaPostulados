@@ -25,6 +25,7 @@ import jakarta.servlet.ServletContext;
  * File management class
  * 
  * @author Johan Silva
+ * @author Sebastian Vega
  * @author Miguel Linarez
  */
 public class FileHandler {
@@ -87,6 +88,12 @@ public class FileHandler {
 		return tmp;
 	}
 
+	/**
+	 * Method for loading information from a text file<br>
+	 * <b>pre: </b>The file to be uploaded exists<br>
+	 * @param msm the history message that will be added
+	 * @param req the context of the server
+	 */
 	public static void writeHistory(String msm, ServletContext req) {
 		try {
 			FileWriter fw = new FileWriter(
@@ -98,6 +105,12 @@ public class FileHandler {
 		}
 	}
 
+	/**
+	 * Generates an csv file with the PostuladoDTO ArrayList
+	 * @param postulados the PostuladoDTO ArrayList to be listed
+	 * @param fileName the file to create the list in
+	 * @param req the context of the server
+	 */
 	public static void generarCSV(ArrayList<PostuladoDTO> postulados, String fileName, ServletContext req) {
 		try {
 			FileWriter fw = crearFileWriter(fileName, req);
@@ -127,6 +140,12 @@ public class FileHandler {
 		}
 	}
 
+	/**
+	 * Creates a FileWriter to create a File in the Desktop
+	 * @param fileName the name of the file to create
+	 * @param req the server context
+	 * @return the FileWriter ready to use
+	 */
 	private static FileWriter crearFileWriter(String fileName, ServletContext req) {
 
 		String escritorio = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
