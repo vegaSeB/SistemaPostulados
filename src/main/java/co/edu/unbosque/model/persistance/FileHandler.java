@@ -25,6 +25,7 @@ import jakarta.servlet.ServletContext;
  * File management class
  * 
  * @author Johan Silva
+ * @author Sebastian Vega
  * @author Miguel Linarez
  */
 public class FileHandler {

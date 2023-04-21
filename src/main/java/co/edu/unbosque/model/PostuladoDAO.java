@@ -19,7 +19,7 @@ public class PostuladoDAO {
 	private ServletContext context;
 
 	/**
-	 * @param context the path to the required information of the app
+	 * The constructor of the class
 	 */
 	public PostuladoDAO() {
 	}
@@ -226,10 +226,10 @@ public class PostuladoDAO {
 					e.printStackTrace();
 				}
 				int length = fileContent.length;
-				// Calcular la cantidad de bytes adicionales necesarios para completar el �ltimo
+				// Calcular la cantidad de bytes adicionales necesarios para completar el último
 				// grupo de 3 bytes
 				int padding = length % 3 == 0 ? 0 : 3 - length % 3;
-				// Crear una nueva matriz de bytes con el tama�o adecuado
+				// Crear una nueva matriz de bytes con el tamaño adecuado
 				byte[] paddedBytes = new byte[length + padding];
 				System.arraycopy(fileContent, 0, paddedBytes, 0, length);
 				String mimeType = "image/png";
@@ -275,8 +275,8 @@ public class PostuladoDAO {
 	/**
 	 * A method to verify a PostuladoDTO is saved on the ArrayList
 	 * @param apellidos the last names of the candidate
-	 * @param fecha     the birthday of the candidate
-	 * @param foto      the picture of the candidate
+	 * @param fecha the birthday of the candidate
+	 * @param foto the picture of the candidate
 	 * @return a boolean to know if the candidate is saved
 	 */
 	public boolean isExistente(String apellidos, LocalDate fecha, String foto) {
@@ -292,8 +292,7 @@ public class PostuladoDAO {
 	/**
 	 * Calculates the difference between the present date and the PostuladoDTO birth day
 	 * @param fecha a date given by the candidate
-	 * @return the subtraction of the years between the date given and the present
-	 *         date
+	 * @return the subtraction of the years between the date given and the present date
 	 */
 	public byte calcularEdad(LocalDate fecha) {
 		LocalDate actual = LocalDate.now();
@@ -380,10 +379,10 @@ public class PostuladoDAO {
 				e.printStackTrace();
 			}
 			int length = fileContent.length;
-			// Calcular la cantidad de bytes adicionales necesarios para completar el �ltimo
+			// Calcular la cantidad de bytes adicionales necesarios para completar el último
 			// grupo de 3 bytes
 			int padding = length % 3 == 0 ? 0 : 3 - length % 3;
-			// Crear una nueva matriz de bytes con el tama�o adecuado
+			// Crear una nueva matriz de bytes con el tamaño adecuado
 			byte[] paddedBytes = new byte[length + padding];
 			System.arraycopy(fileContent, 0, paddedBytes, 0, length);
 			String mimeType = "image/png";
@@ -418,21 +417,4 @@ public class PostuladoDAO {
 		}
 		return sb.toString();
 	}
-
-	/**
-	 * Gets the actual context that the class has
-	 * @return The class context
-	 */
-	public ServletContext getContext() {
-		return context;
-	}
-
-	/**
-	 * Sets the class context to a new one
-	 * @param context the new context of the class
-	 */
-	public void setContext(ServletContext context) {
-		this.context = context;
-	}
-	
 }

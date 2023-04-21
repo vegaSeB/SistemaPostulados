@@ -16,15 +16,16 @@ public class PostuladoDTO implements Serializable {
 	private byte edad;
 
 	/**
-	 * @param nombres
-	 * @param apellidos
-	 * @param colegio
-	 * @param carrera
-	 * @param estrato
-	 * @param foto
-	 * @param fecha
-	 * @param homologacion
-	 * @param edad
+	 * The constructor with the variables that can that the object/class has
+	 * @param nombres the name of the Postulado
+	 * @param apellidos the last names of the Postulado
+	 * @param colegio the name of the school the Postulado graduated from
+	 * @param carrera the career the Postulado is interested of
+	 * @param estrato the stratum of the Postulado
+	 * @param foto the string of the foto given by the Postulado
+	 * @param fecha the birth day of the Postulado
+	 * @param homologacion the homologacion state of the Postulado
+	 * @param edad the age of the Postulado
 	 */
 	public PostuladoDTO(String nombres, String apellidos, String colegio, String carrera, String estrato, String foto,
 			LocalDate fecha, boolean homologacion, byte edad) {
@@ -40,6 +41,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * accesses to the name of the Postulado
 	 * @return the nombres
 	 */
 	public String getNombres() {
@@ -47,6 +49,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * changes the name of the Postulado
 	 * @param nombres the nombres to set
 	 */
 	public void setNombres(String nombres) {
@@ -54,6 +57,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * accesses to the last names of the Postulado
 	 * @return the apellidos
 	 */
 	public String getApellidos() {
@@ -61,6 +65,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * changes the last names of the Postulado
 	 * @param apellidos the apellidos to set
 	 */
 	public void setApellidos(String apellidos) {
@@ -68,6 +73,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * accesses to the school of the Postulado
 	 * @return the colegio
 	 */
 	public String getColegio() {
@@ -75,6 +81,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * changes the school of the Postulado
 	 * @param colegio the colegio to set
 	 */
 	public void setColegio(String colegio) {
@@ -82,6 +89,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * accesses to the career of interest of the Postulado
 	 * @return the carrera
 	 */
 	public String getCarrera() {
@@ -89,6 +97,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * changes the career of interest of the Postulado
 	 * @param carrera the carrera to set
 	 */
 	public void setCarrera(String carrera) {
@@ -96,6 +105,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * accesses to the stratum of the Postulado
 	 * @return the estrato
 	 */
 	public String getEstrato() {
@@ -103,6 +113,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * changes the stratum of the Postulado
 	 * @param estrato the estrato to set
 	 */
 	public void setEstrato(String estrato) {
@@ -110,6 +121,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * accesses to the foto of the Postulado
 	 * @return the foto
 	 */
 	public String getFoto() {
@@ -117,6 +129,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * changes the foto of the Postulado
 	 * @param foto the foto to set
 	 */
 	public void setFoto(String foto) {
@@ -124,6 +137,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * accesses to the date given by the postulado
 	 * @return the fecha
 	 */
 	public LocalDate getFecha() {
@@ -131,6 +145,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * changes the date given by the Postulado
 	 * @param fecha the fecha to set
 	 */
 	public void setFecha(LocalDate fecha) {
@@ -138,6 +153,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * accesses to the status homologacion status of the Postulado
 	 * @return the homologacion
 	 */
 	public boolean isHomologacion() {
@@ -145,6 +161,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * changes the homologacion status of the Postulado
 	 * @param homologacion the homologacion to set
 	 */
 	public void setHomologacion(boolean homologacion) {
@@ -152,6 +169,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * accesses to the age of the Postulado
 	 * @return the edad
 	 */
 	public byte getEdad() {
@@ -159,6 +177,7 @@ public class PostuladoDTO implements Serializable {
 	}
 
 	/**
+	 * changes the ages of the Postulado
 	 * @param edad the edad to set
 	 */
 	public void setEdad(byte edad) {

@@ -28,8 +28,11 @@ public class ServletUser extends HttpServlet {
 
 	private PostuladoDAO postul;
 
+	/**
+	 * The constructor of the class
+	 */
 	public ServletUser() {
-		postul = new PostuladoDAO(null);
+		postul = new PostuladoDAO();
     }
 	
 	@Override
@@ -86,7 +89,7 @@ public class ServletUser extends HttpServlet {
 				+ "WEB-INF/classes/co/edu/unbosque/model/persistance/" + fileName);
 		foto = fileName;
 		//
-		postul.setContext(this.getServletContext());
+		postul.cotext(this.getServletContext());
 		postul.crear(nomb, apell, cole, carrera, estrato, foto, fecha, isHomo);
 		postul.guardar(this.getServletContext());
 		salida.println("<!DOCTYPE html>\r\n" + "<html>\r\n" + "    <head>\r\n" + "        <meta charset='utf-8'>\r\n"
