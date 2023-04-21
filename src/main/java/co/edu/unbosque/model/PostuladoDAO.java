@@ -14,6 +14,13 @@ import co.edu.unbosque.model.persistance.FileHandler;
 import co.edu.unbosque.view.VistaConsola;
 import jakarta.servlet.ServletContext;
 
+/**
+ * The DAO of the PostuladoDTO class
+ * 
+ * @author Johan Silva
+ * @author Sebastian Vega
+ * @author Miguel Linarez
+ */
 public class PostuladoDAO {
 	private ArrayList<PostuladoDTO> postulados;
 	private ServletContext context;
