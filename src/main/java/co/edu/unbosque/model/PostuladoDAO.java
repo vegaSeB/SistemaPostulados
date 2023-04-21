@@ -1,14 +1,8 @@
 package co.edu.unbosque.model;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URLConnection;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Base64;
-
-import org.apache.commons.io.FileUtils;
 
 import co.edu.unbosque.model.persistance.FileHandler;
 import co.edu.unbosque.view.VistaConsola;
@@ -91,9 +85,6 @@ public class PostuladoDAO {
 		for (int i = 0; i < postulados.size(); i++) {
 			if (postulados.get(i).getApellidos().equalsIgnoreCase(apellidos)
 					&& postulados.get(i).getFecha().compareTo(fecha) == 0) {
-				File file = new File(context.getRealPath("/") + "WEB-INF/classes/co/edu/unbosque/model/persistance/"
-						+ postulados.get(i).getFoto());
-				file.delete();
 				postulados.remove(i);
 				guardar(context);
 				FileHandler.generarCSV(postulados, "Datos.csv", context);
@@ -211,21 +202,11 @@ public class PostuladoDAO {
 				} else if (postulados.get(i).getCarrera().equals("Psicologia")) {
 					precio = 6000.0;
 				}
-
-				File file = new File(context.getRealPath(
-						"WEB-INF/classes/co/edu/unbosque/model/persistance" + "/" + postulados.get(i).getFoto()));
-				byte[] fileContent = null;
-				try {
-					fileContent = FileUtils.readFileToByteArray(file);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				String base64Encoded = Base64.getEncoder().encodeToString(fileContent);
 				resultado = " <div class=\"row mt-4\">\r\n"
 						+ "                        <div class=\"col-2 text-center\">\r\n"
 						+ "                            <img\r\n" + "                                src=\""
-						+ "data:image/png;base64," + base64Encoded + "alt=\"imagen\"\">\r\n"
-						+ "                        </div>\r\n" + "\r\n"
+						+ context.getRealPath("/") + "WEB-INF/classes/co/edu/unbosque/model/persistance/"
+						+ postulados.get(i).getFoto() + "\">\r\n" + "                        </div>\r\n" + "\r\n"
 						+ "                        <div class=\"col-10\">\r\n"
 						+ "                            <table class=\"table\">\r\n"
 						+ "                                <thead>\r\n" + "                                    <tr>\r\n"
@@ -258,7 +239,6 @@ public class PostuladoDAO {
 		}
 		VistaConsola.msm("Postulate " + apellidos + " not found", context);
 		return null;
-
 	}
 
 	/**
@@ -355,22 +335,12 @@ public class PostuladoDAO {
 			} else if (pos.getCarrera().equals("Psicologia")) {
 				precio = 6000.0;
 			}
-			File file = new File(
-					context.getRealPath("WEB-INF/classes/co/edu/unbosque/model/persistance" + "/" + pos.getFoto()));
-			byte[] fileContent = null;
-			try {
-				fileContent = FileUtils.readFileToByteArray(file);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			String mimeType = URLConnection.guessContentTypeFromName(file.getName());
-			String base64Encoded = Base64.getEncoder().encodeToString(fileContent);
 			sb.append(" <div class=\"row mt-4\">\r\n" + "                        <div class=\"col-2 text-center\">\r\n"
-					+ "                            <img\r\n" + "                                src=\"" + "data:"
-					+ mimeType + ";base64," + base64Encoded + "alt=\"imagen\"\">\r\n"
-					+ "                        </div>\r\n" + "\r\n"
+					+ "                            <img\r\n" + "                                src=\""
+					+ context.getRealPath("/") + "WEB-INF/classes/co/edu/unbosque/model/persistance/" + pos.getFoto()
+					+ "\">\r\n" + "                        </div>\r\n" + "\r\n"
 					+ "                        <div class=\"col-10\">\r\n"
-					+ "                            <table class=\"table pb-lg-3\">\r\n"
+					+ "                            <table class=\"table\">\r\n"
 					+ "                                <thead>\r\n" + "                                    <tr>\r\n"
 					+ "                                        <th>Apellidos</th>\r\n"
 					+ "                                        <th>Nombres</th>\r\n"
